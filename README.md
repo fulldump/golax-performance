@@ -59,9 +59,14 @@ ab -n 100000 -c 500 http://localhost:8000/service/v1/users/2
 
 ## About the implementations
 
+All implement a CRUD API described [here](https://github.com/fulldump/golax/blob/master/example/README.md) and:
+
+* Errors are returned in JSON format
+* All requests are logged to stdout and/or stderr
+
 ### Golax
 
-The implementation is the standard way a REST API should be implemented with golax.
+The code is the standard way a REST API should be implemented with golax.
 
 ### Gorilla
 
