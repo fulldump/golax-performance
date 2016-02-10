@@ -9,10 +9,10 @@ GOCMD=GOPATH=$(GOPATH) GOBIN=$(GOBIN) $(GO)
 .PHONY: clean golax gorilla
 
 clean:
-	rm *.log
+	rm -f *.log
 	rm -fr src/github.com
 	rm -fr $(GOBIN)
-	rm -ft $(GOPKG)
+	rm -fr $(GOPKG)
 
 golax:
 	$(GOCMD) get golax
