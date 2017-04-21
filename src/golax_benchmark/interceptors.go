@@ -1,4 +1,4 @@
-package main
+package golax_benchmark
 
 import (
 	"log"

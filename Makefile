@@ -4,9 +4,12 @@ GOPKG=$(GOPATH)/pkg
 GO=go
 GOCMD=GOPATH=$(GOPATH) GOBIN=$(GOBIN) $(GO)
 
-.DEFAULT_GOAL := test
+.DEFAULT_GOAL := benchmark
 
-.PHONY: clean golax gorilla
+.PHONY: benchmark clean golax gorilla chi
+
+benchmark:
+	$(GOCMD) test  -bench=".*" -benchmem benchmark
 
 clean:
 	rm -f *.log
@@ -15,11 +18,17 @@ clean:
 	rm -fr $(GOPKG)
 
 golax:
-	$(GOCMD) get golax
-	$(GOCMD) install golax
-	$(GOBIN)/golax >> golax.log 2>&1
+	$(GOCMD) get golax_benchmark/golax_server
+	$(GOCMD) install golax_benchmark/golax_server
+	$(GOBIN)/golax_server >> golax.log 2>&1
 
 gorilla:
-	$(GOCMD) get gorilla
-	$(GOCMD) install gorilla
-	$(GOBIN)/gorilla >> gorilla.log 2>&1
+	$(GOCMD) get gorilla_benchmark/gorilla_server
+	$(GOCMD) install gorilla_benchmark/gorilla_server
+	$(GOBIN)/gorilla_server >> gorilla.log 2>&1
+
+chi:
+	$(GOCMD) get chi_benchmark/chi_server
+	$(GOCMD) install chi_benchmark/chi_server
+	$(GOBIN)/chi_server >> chi.log 2>&1
+

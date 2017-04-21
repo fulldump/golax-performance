@@ -1,4 +1,4 @@
-package main
+package gorilla_benchmark
 
 import (
 	"net/http"
@@ -6,7 +6,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func NewRouter() *mux.Router {
+func NewApi() *mux.Router {
 
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {

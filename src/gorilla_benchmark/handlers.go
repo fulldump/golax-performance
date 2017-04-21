@@ -1,4 +1,4 @@
-package main
+package gorilla_benchmark
 
 import (
 	"encoding/json"
