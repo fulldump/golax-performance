@@ -52,15 +52,13 @@ func NewApi() http.Handler {
 	return r
 }
 
-var letters = []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "ñ", "o", "p", "q", "r", "s", "t", "u", "v", "w", "y", "z"}
-
 func MakeLetters(r chi.Router, level int, prefix string) {
 
 	if 0 == level {
 		return
 	}
 
-	for _, letter := range letters {
+	for _, letter := range model.Letters {
 		p := prefix + "/" + letter
 		MakeLetters(r.Route("/"+letter, func(r chi.Router) {
 			r.Get("/", func(w http.ResponseWriter, r *http.Request) {
