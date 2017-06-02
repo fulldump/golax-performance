@@ -61,6 +61,13 @@ Tests has been executed in a `Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz` and 16GiB
 
 ## Run tests in your machine
 
+Run all benchmarks for all frameworks:
+
+```sh
+make dependencies
+make benchmark
+```
+
 Make and run golax:
 
 ```sh
