@@ -10,5 +10,5 @@ func main() {
 
 	router := gorilla_benchmark.NewApi()
 
-	log.Fatal(http.ListenAndServe(":8000", router))
+	log.Fatal(http.ListenAndServe(":9999", router))
 }

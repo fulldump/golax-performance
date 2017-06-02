@@ -9,7 +9,7 @@ GOCMD=GOPATH=$(GOPATH) GOBIN=$(GOBIN) $(GO)
 .PHONY: benchmark clean golax gorilla chi
 
 benchmark:
-	$(GOCMD) test  -bench=".*" -benchmem benchmark
+	$(GOCMD) test  -bench=".*" -benchtime 10s -benchmem benchmark
 
 clean:
 	rm -f *.log

@@ -7,5 +7,5 @@ import (
 
 func main() {
 
-	http.ListenAndServe(":8000", chi_benchmark.NewApi())
+	http.ListenAndServe(":9999", chi_benchmark.NewApi())
 }

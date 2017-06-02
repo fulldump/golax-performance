@@ -8,7 +8,7 @@ import (
 func main() {
 
 	s := &http.Server{
-		Addr:    "0.0.0.0:8080",
+		Addr:    "0.0.0.0:9999",
 		Handler: golax_benchmark.NewApi(),
 	}
 
