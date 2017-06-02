@@ -120,10 +120,10 @@ ab -n 200000 -c 500 http://localhost:9999/letters/z/z/z
 
 Keep alive:
 ```sh
-ab -k -n 20000 -c 100 http://localhost:9999/service/v1/users
-ab -k -n 20000 -c 100 http://localhost:9999/service/v1/users/2
-ab -k -n 20000 -c 100 http://localhost:9999/letters/z/z
-ab -k -n 20000 -c 100 http://localhost:9999/letters/z/z/z
+ab -k -n 200000 -c 100 http://localhost:9999/service/v1/users
+ab -k -n 200000 -c 100 http://localhost:9999/service/v1/users/2
+ab -k -n 200000 -c 100 http://localhost:9999/letters/z/z
+ab -k -n 200000 -c 100 http://localhost:9999/letters/z/z/z
 ```
 
 
