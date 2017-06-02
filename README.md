@@ -4,10 +4,16 @@
 
 - [Intro](#intro)
 - [The results](#the-results)
+	- [List users](#list-users)
+	- [Retrieve user](#retrieve-user)
+	- [`GET letters/z/z`](#get-letterszz)
+	- [`GET letters/z/z/z`](#get-letterszzz)
+	- [Keep alive with 100 threads](#keep-alive-with-100-threads)
 - [Run tests in your machine](#run-tests-in-your-machine)
 - [About the implementations](#about-the-implementations)
-    - [Golax](#golax)
-    - [Gorilla](#gorilla)
+	- [Golax](#golax)
+	- [Gorilla](#gorilla)
+	- [Chi](#chi)
 - [About the code readability and maintainability](#about-the-code-readability-and-maintainability)
 
 <!-- /MarkdownTOC -->
@@ -20,17 +26,47 @@ The performance compared with the [most popular alternative](http://www.gorillat
 
 ## The results
 
-<p align="center">
-    <img src="doc/performance-10-threads.png">
-</p>
+### List users
 
 <p align="center">
-    <img src="doc/performance-500-threads.png">
+    <img src="https://docs.google.com/spreadsheets/d/1q0NdoBge4UO_VmFGwcYDN4WQZzKuqCXNrtJzThVdJWQ/pubchart?oid=1063158416&format=image">
 </p>
 
-Tests has been executed in a `Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz`.
+### Retrieve user
+
+<p align="center">
+    <img src="https://docs.google.com/spreadsheets/d/1q0NdoBge4UO_VmFGwcYDN4WQZzKuqCXNrtJzThVdJWQ/pubchart?oid=478921787&format=image">
+</p>
+
+### `GET letters/z/z`
+
+<p align="center">
+    <img src="https://docs.google.com/spreadsheets/d/1q0NdoBge4UO_VmFGwcYDN4WQZzKuqCXNrtJzThVdJWQ/pubchart?oid=1350397502&format=image">
+</p>
+
+### `GET letters/z/z/z`
+
+<p align="center">
+    <img src="https://docs.google.com/spreadsheets/d/1q0NdoBge4UO_VmFGwcYDN4WQZzKuqCXNrtJzThVdJWQ/pubchart?oid=1153847898&format=image">
+</p>
+
+### Keep alive with 100 threads
+
+<p align="center">
+    <img src="https://docs.google.com/spreadsheets/d/1q0NdoBge4UO_VmFGwcYDN4WQZzKuqCXNrtJzThVdJWQ/pubchart?oid=1936169051&format=image">
+</p>
+
+
+Tests has been executed in a `Intel(R) Core(TM) i5-2400 CPU @ 3.10GHz` and 16GiB RAM.
 
 ## Run tests in your machine
+
+Run all benchmarks for all frameworks:
+
+```sh
+make dependencies
+make benchmark
+```
 
 Make and run golax:
 
@@ -43,19 +79,53 @@ Make and run gorilla:
 make gorilla
 ```
 
+Make and run chi:
+```sh
+make chi
+```
+
 Execute tests:
+
+1 thread:
+```sh
+ab -n 20000 -c 1 http://localhost:9999/service/v1/users
+ab -n 20000 -c 1 http://localhost:9999/service/v1/users/2
+ab -n 20000 -c 1 http://localhost:9999/letters/z/z
+ab -n 20000 -c 1 http://localhost:9999/letters/z/z/z
+```
 
 10 threads:
 ```sh
-ab -n 100000 -c 10 http://localhost:8000/service/v1/users
-ab -n 100000 -c 10 http://localhost:8000/service/v1/users/2
+ab -n 200000 -c 10 http://localhost:9999/service/v1/users
+ab -n 200000 -c 10 http://localhost:9999/service/v1/users/2
+ab -n 200000 -c 10 http://localhost:9999/letters/z/z
+ab -n 200000 -c 10 http://localhost:9999/letters/z/z/z
+```
+
+100 threads:
+```sh
+ab -n 200000 -c 100 http://localhost:9999/service/v1/users
+ab -n 200000 -c 100 http://localhost:9999/service/v1/users/2
+ab -n 200000 -c 100 http://localhost:9999/letters/z/z
+ab -n 200000 -c 100 http://localhost:9999/letters/z/z/z
 ```
 
 500 threads:
 ```sh
-ab -n 100000 -c 500 http://localhost:8000/service/v1/users
-ab -n 100000 -c 500 http://localhost:8000/service/v1/users/2
+ab -n 200000 -c 500 http://localhost:9999/service/v1/users
+ab -n 200000 -c 500 http://localhost:9999/service/v1/users/2
+ab -n 200000 -c 500 http://localhost:9999/letters/z/z
+ab -n 200000 -c 500 http://localhost:9999/letters/z/z/z
 ```
+
+Keep alive:
+```sh
+ab -k -n 200000 -c 100 http://localhost:9999/service/v1/users
+ab -k -n 200000 -c 100 http://localhost:9999/service/v1/users/2
+ab -k -n 200000 -c 100 http://localhost:9999/letters/z/z
+ab -k -n 200000 -c 100 http://localhost:9999/letters/z/z/z
+```
+
 
 ## About the implementations
 
@@ -64,13 +134,21 @@ All implement a CRUD API described [here](https://github.com/fulldump/golax/blob
 * Errors are returned in JSON format
 * All requests are logged to stdout and/or stderr
 
+
 ### Golax
 
 The code is the standard way a REST API should be implemented with golax.
 
+
 ### Gorilla
 
 Gorilla implementation has been done following [Making a RESTful JSON API in Go](https://thenewstack.io/make-a-restful-json-api-go/) article.
+
+
+### Chi
+
+I am glad to know about Chi, it follows the same approach as golax and it has a very similar implementation. 
+
 
 ## About the code readability and maintainability
 

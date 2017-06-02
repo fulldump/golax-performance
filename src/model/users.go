@@ -14,13 +14,6 @@ func (user *User) Id() int {
 var Users = map[int]*User{}
 var users_last_id = 0
 
-func InsertUser(u *User) {
-	users_last_id++ // NOTE: This should be thread safe in a nice server
-
-	u.id = users_last_id
-	Users[u.id] = u
-}
-
 /**
  * Insert 3 sample users
  */

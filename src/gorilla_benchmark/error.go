@@ -1,4 +1,4 @@
-package main
+package gorilla_benchmark
 
 type jsonErr struct {
 	Code int    `json:"code"`
